@@ -65,4 +65,11 @@ class Validator {
     }
     return "";
   }
+
+  static int userExists() {
+    for (int i = 0; i < allUsers.length; i++) {
+      if (allUsers[i].username == currentUser.username) return i;
+    }
+    return -1;
+  }
 }

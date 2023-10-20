@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_project/firstLogInPage.dart';
 import 'package:my_project/forgotPassword.dart';
+import 'package:my_project/model/user_model.dart';
 import 'package:my_project/registrationPage.dart';
 import 'package:my_project/services/validate.dart';
 
@@ -60,6 +61,9 @@ class loginPageState extends State<loginPage> {
                         if (value == null) return "This field cannot be empty.";
                         String ret = Validator.loginPageVerifyEmail(value);
                         if (ret == "") return null;
+                        currentUser = new User();
+                        currentUser.username = value;
+                        currentUser = allUsers[Validator.userExists()];
                         return ret;
                       },
                     ),

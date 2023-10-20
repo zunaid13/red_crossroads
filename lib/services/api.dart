@@ -44,14 +44,31 @@ class Api {
 
   static updateUserInfo() async {
     var url = Uri.parse("${baseUrl}update/" + currentUser.username);
-    final body = json.encode(currentUser);
-
+    final body = json.encode(currentUser.toJson());
+    print(body);
     try {
-      final response = await http.patch(url, body: body);
+      final response = await http.post(url,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: json.encode(currentUser.toJson()));
       if (response.statusCode == 200) {
         print('User info updated successfully');
       } else {
         print('Failed to update user info');
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
+  static sendOTP() async {
+    var url = Uri.parse("${baseUrl}send_otp/" + currentUser.username);
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        currentUser.emergencyPassword = response.body;
+        print(response.body);
       }
     } catch (e) {
       print("Error: $e");

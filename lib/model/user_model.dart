@@ -17,6 +17,7 @@ class User {
   double longitude = -1;
   double latitude = -1;
   bool visible = false;
+  bool donor = false;
 
   User();
 
@@ -39,7 +40,8 @@ class User {
       ..total_donation = json['total_donation'] ?? 0
       ..longitude = (json['longitude'] as num?)?.toDouble() ?? -1
       ..latitude = (json['latitude'] as num?)?.toDouble() ?? -1
-      ..visible = json['visible'] ?? false;
+      ..visible = json['visible'] ?? false
+      ..donor = json['donor'] ?? false;
   }
   Map<String, dynamic> toJson() {
     return {
@@ -61,6 +63,7 @@ class User {
       'longitude': longitude,
       'latitude': latitude,
       'visible': visible,
+      'donor': donor,
     };
   }
 }

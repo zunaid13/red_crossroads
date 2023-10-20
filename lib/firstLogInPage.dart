@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/model/user_model.dart';
+import 'package:my_project/services/api.dart';
 
 class firstLoginPage extends StatefulWidget {
   @override
@@ -65,6 +67,11 @@ class firstLoginPageState extends State<firstLoginPage> {
                       if (value!.isEmpty) {
                         return 'Please enter your weight';
                       }
+                      if (double.tryParse(value) == null ||
+                          double.tryParse(value)! < 0) {
+                        return 'Please enter a valid number';
+                      }
+                      _weight = double.tryParse(value);
                       return null;
                     },
                   ),
@@ -121,6 +128,11 @@ class firstLoginPageState extends State<firstLoginPage> {
                       if (value!.isEmpty) {
                         return 'Please enter your contact number';
                       }
+                      if (int.tryParse(value) == null ||
+                          int.tryParse(value)! < 0) {
+                        return 'Please enter a valid number';
+                      }
+                      _contactNo = value;
                       return null;
                     },
                   ),
@@ -133,6 +145,7 @@ class firstLoginPageState extends State<firstLoginPage> {
                       if (value!.isEmpty) {
                         return 'Please enter your division';
                       }
+                      _division = value;
                       return null;
                     },
                   ),
@@ -170,6 +183,15 @@ class firstLoginPageState extends State<firstLoginPage> {
       print("Contact No: $_contactNo");
       print("Division: $_division");
       print("Want to be Opted as a Donor: $_wantToBeDonor");
+
+      currentUser.gender = _gender!;
+      currentUser.weight = _weight!;
+      currentUser.bloodGroup = _bloodGroup!;
+      currentUser.rh_factor = _rhFactor!;
+      currentUser.contact_no = _contactNo!;
+      currentUser.division = _division!;
+      currentUser.donor = _wantToBeDonor;
+      Api.updateUserInfo();
     }
   }
 }

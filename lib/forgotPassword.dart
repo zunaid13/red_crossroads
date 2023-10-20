@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/model/user_model.dart';
 import 'package:my_project/otp.dart';
+import 'package:my_project/services/api.dart';
+import 'package:my_project/services/validate.dart';
 
 class forgotPassword extends StatefulWidget {
   @override
@@ -8,6 +11,7 @@ class forgotPassword extends StatefulWidget {
 
 class _forgotPasswordState extends State<forgotPassword> {
   final TextEditingController emailController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,21 +47,46 @@ class _forgotPasswordState extends State<forgotPassword> {
                     SizedBox(
                       height: 20,
                     ),
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Email'),
+                    // TextField(
+                    //   decoration: InputDecoration(labelText: 'Email'),
+                    // ),
+                    //START
+                    Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        controller: emailController,
+                        decoration: InputDecoration(labelText: 'Email'),
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                        validator: (value) {
+                          if (value == null)
+                            return "This field cannot be empty";
+                          currentUser = new User();
+                          currentUser.username = value;
+                          if (Validator.userExists() != -1) return null;
+                          return "User does not exist.";
+                        },
+                        onSaved: (value) {
+                          // Store the value
+                        },
+                      ),
                     ),
+                    //END
                     SizedBox(height: 25),
                     SizedBox(
                       height: 45,
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => otpPage(),
-                            ),
-                          );
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
+                            Api.sendOTP();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => otpPage(),
+                              ),
+                            );
+                          }
                         },
                         child: Text('Send Code'),
                         style: ElevatedButton.styleFrom(
@@ -66,7 +95,7 @@ class _forgotPasswordState extends State<forgotPassword> {
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
