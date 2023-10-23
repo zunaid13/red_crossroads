@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_project/firstLogInPage.dart';
 import 'package:my_project/forgotPassword.dart';
+import 'package:my_project/mainMenu.dart';
 import 'package:my_project/model/user_model.dart';
 import 'package:my_project/registrationPage.dart';
 import 'package:my_project/services/validate.dart';
@@ -60,11 +61,11 @@ class loginPageState extends State<loginPage> {
                       validator: (value) {
                         if (value == null) return "This field cannot be empty.";
                         String ret = Validator.loginPageVerifyEmail(value);
-                        if (ret == "") return null;
+                        if (ret != "") return ret;
                         currentUser = new User();
                         currentUser.username = value;
                         currentUser = allUsers[Validator.userExists()];
-                        return ret;
+                        return null;
                       },
                     ),
                     SizedBox(height: 16),
@@ -146,8 +147,13 @@ class loginPageState extends State<loginPage> {
     if (_formKey.currentState!.validate()) {
       // Form is valid, you can perform actions here
       // For example, you can send data to a server or navigate to another page.
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => firstLoginPage()));
+      if (currentUser.gender == "") {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => firstLoginPage()));
+      } else {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => mainMenu()));
+      }
     }
   }
 

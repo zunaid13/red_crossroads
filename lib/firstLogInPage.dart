@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/mainMenu.dart';
 import 'package:my_project/model/user_model.dart';
 import 'package:my_project/services/api.dart';
 
@@ -192,6 +193,8 @@ class firstLoginPageState extends State<firstLoginPage> {
       currentUser.division = _division!;
       currentUser.donor = _wantToBeDonor;
       Api.updateUserInfo();
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => mainMenu()));
     }
   }
 }

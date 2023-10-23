@@ -40,11 +40,12 @@ class Validator {
     final hasNumber = RegExp(r'[0-9]');
     final hasSpecial = RegExp(r'[!@#\$%^&*()_+{}|:"<>,.?~]');
     String ret = "";
-    if (!hasUppercase.hasMatch(password)) ret += "(A-Z) ";
-    if (!hasLowercase.hasMatch(password)) ret += "(a-z) ";
-    if (!hasNumber.hasMatch(password)) ret += "(0-9) ";
+    if (!hasUppercase.hasMatch(password)) ret += "[A-Z] ";
+    if (!hasLowercase.hasMatch(password)) ret += "[a-z] ";
+    if (!hasNumber.hasMatch(password)) ret += "[0-9] ";
     if (!hasSpecial.hasMatch(password)) ret += "Special ";
     if (!ret.isEmpty) ret += "characters missing";
+    if (password.length < 8) ret = "Password has to be at least 8 letters long";
     return ret;
   }
 

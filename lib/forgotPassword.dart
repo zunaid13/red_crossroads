@@ -62,7 +62,10 @@ class _forgotPasswordState extends State<forgotPassword> {
                             return "This field cannot be empty";
                           currentUser = new User();
                           currentUser.username = value;
-                          if (Validator.userExists() != -1) return null;
+                          if (Validator.userExists() != -1) {
+                            currentUser = allUsers[Validator.userExists()];
+                            return null;
+                          }
                           return "User does not exist.";
                         },
                         onSaved: (value) {
@@ -79,6 +82,7 @@ class _forgotPasswordState extends State<forgotPassword> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
+                            print('Now going to API');
                             Api.sendOTP();
                             Navigator.push(
                               context,
