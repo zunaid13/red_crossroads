@@ -21,12 +21,12 @@ class mapPageState extends State<mapPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Track order",
+          "Map",
           style: TextStyle(color: Colors.black, fontSize: 16),
         ),
       ),
       body: const Center(
-        child: Text("The Flutter Way!"),
+        child: Text("Map"),
       ),
     );
   }

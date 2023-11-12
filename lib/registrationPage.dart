@@ -171,6 +171,7 @@ class registrationPageState extends State<registrationPage> {
     currentUser.dob = dob;
     Api.addUserToDatabase();
     allUsers.add(currentUser);
+    Navigator.pop(context);
     // Implement your registration logic here using the collected data.
   }
 }

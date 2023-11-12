@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:my_project/loginPage.dart';
 import 'package:my_project/map.dart';
+import 'package:my_project/viewProfile.dart';
 
 class mainMenu extends StatelessWidget {
   Future<void> _showExitConfirmationDialog(BuildContext context) async {
@@ -24,6 +25,33 @@ class mainMenu extends StatelessWidget {
                 exit(0); // Change to 0 for a normal app exit
               },
               child: Text('Exit'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _showLogoutConfirmationDialog(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Confirm Log Out'),
+          content: Text('Are you sure you want to log out?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => loginPage()));
+              },
+              child: Text('Log Out'),
             ),
           ],
         );
@@ -88,7 +116,12 @@ class mainMenu extends StatelessWidget {
                   height: 45,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => profilePage()));
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -111,8 +144,7 @@ class mainMenu extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => loginPage()));
+                      _showLogoutConfirmationDialog(context);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

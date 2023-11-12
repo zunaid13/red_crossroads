@@ -84,7 +84,7 @@ class _forgotPasswordState extends State<forgotPassword> {
                             _formKey.currentState!.save();
                             print('Now going to API');
                             Api.sendOTP();
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => otpPage(),

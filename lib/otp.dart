@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/changePasswordOTP.dart';
 import 'package:my_project/model/user_model.dart';
 import 'package:pinput/pinput.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -102,6 +103,11 @@ class otpPageState extends State<otpPage> {
                               if (otp == currentUser.emergencyPassword) {
                                 // OTP is correct
                                 // You can navigate to the next screen or show a success message.
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            changePasswordOTP()));
                               } else {
                                 // OTP is incorrect, show a toast message.
                                 Fluttertoast.showToast(
