@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:my_project/model/user_model.dart';
 
 class profilePage extends StatefulWidget {
@@ -15,33 +14,62 @@ class _profilePageState extends State<profilePage> {
   String bloodGroup = currentUser.bloodGroup + " " + currentUser.rh_factor;
   String dob = currentUser.dob;
   String contactNo = currentUser.contact_no;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/loginBGW2.png'),
-          fit: BoxFit.cover,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('User Profile'),
       ),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('User Profile'),
-        ),
-        body: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text('Name: $fullName', style: TextStyle(fontSize: 18)),
-              Text('Email: $email', style: TextStyle(fontSize: 18)),
-              Text('Gender: $gender', style: TextStyle(fontSize: 18)),
-              Text('Weight:  $weight KGs', style: TextStyle(fontSize: 18)),
-              Text('Blood Group: $bloodGroup', style: TextStyle(fontSize: 18)),
-              Text('Date of Birth: $dob', style: TextStyle(fontSize: 18)),
-              Text('Contact No: $contactNo', style: TextStyle(fontSize: 18)),
-            ],
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/loginBGW2.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  'assets/profile.png',
+                  height: 200,
+                  width: 400,
+                ),
+                _buildProfileInfo('Name', fullName),
+                _buildProfileInfo('Email', email),
+                _buildProfileInfo('Gender', gender),
+                _buildProfileInfo('Weight', '$weight KGs'),
+                _buildProfileInfo('Blood Group', bloodGroup),
+                _buildProfileInfo('Date of Birth', dob),
+                _buildProfileInfo('Contact No', contactNo),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfileInfo(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: RichText(
+        text: TextSpan(
+          style: TextStyle(fontSize: 18, color: Colors.black),
+          children: [
+            TextSpan(
+              text: '$title: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: value),
+          ],
         ),
       ),
     );

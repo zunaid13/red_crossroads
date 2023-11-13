@@ -98,8 +98,33 @@ class mainMenu extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Icon(Icons.map, size: 40),
+                        Text('Search Nearby', style: TextStyle(fontSize: 16)),
+                        Icon(Icons.arrow_forward,
+                            size: 40), // Add an arrow icon
+                      ],
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                SizedBox(
+                  height: 45,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => mapPage()));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
                         Icon(Icons.search, size: 40),
-                        Text('Search', style: TextStyle(fontSize: 16)),
+                        Text('Search Filters', style: TextStyle(fontSize: 16)),
                         Icon(Icons.arrow_forward,
                             size: 40), // Add an arrow icon
                       ],
