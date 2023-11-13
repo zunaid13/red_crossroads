@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:my_project/loginPage.dart';
 import 'package:my_project/map.dart';
+import 'package:my_project/searchPage.dart';
 import 'package:my_project/viewProfile.dart';
 
 class mainMenu extends StatelessWidget {
@@ -117,8 +118,10 @@ class mainMenu extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => mapPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SearchPage()));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
