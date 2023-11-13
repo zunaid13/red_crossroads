@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_project/model/user_model.dart';
+import 'package:my_project/services/api.dart';
 
 class UpdateProfilePage extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
   TextEditingController bloodGroupController = TextEditingController();
   TextEditingController dobController = TextEditingController();
   TextEditingController contactNoController = TextEditingController();
+  TextEditingController divisionController = TextEditingController();
 
   bool isDonor = false;
   bool isVisible = false;
@@ -30,6 +32,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
         currentUser.bloodGroup + " " + currentUser.rh_factor;
     dobController.text = currentUser.dob;
     contactNoController.text = currentUser.contact_no;
+    divisionController.text = currentUser.division;
   }
 
   @override
@@ -56,9 +59,8 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                 // _buildTextField('Email', emailController),
                 // _buildTextField('Gender', genderController),
                 _buildTextField('Weight (KGs)', weightController),
-                _buildTextField('Blood Group', bloodGroupController),
-                _buildTextField('Date of Birth', dobController),
                 _buildTextField('Contact No', contactNoController),
+                _buildTextField('Division', divisionController),
                 _buildCheckbox('Opt In as Donor', isDonor, (value) {
                   setState(() {
                     isDonor = value!;
@@ -72,6 +74,14 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
+                    currentUser.fullname = fullNameController.text;
+                    currentUser.weight = double.parse(weightController.text);
+                    currentUser.contact_no = contactNoController.text;
+                    currentUser.donor = isDonor;
+                    currentUser.visible = isVisible;
+                    currentUser.division = divisionController.text;
+                    Api.updateUserInfo();
+                    Navigator.pop(context);
                     // Update user information here
                     // You can access the edited values using the controllers
                     // For example: fullNameController.text, emailController.text, etc.

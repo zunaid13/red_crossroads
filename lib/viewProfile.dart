@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_project/model/user_model.dart';
+import 'package:my_project/updateProfilePage.dart';
 
 class profilePage extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class _profilePageState extends State<profilePage> {
 
   @override
   Widget build(BuildContext context) {
+    print(currentUser.fullname);
     return Scaffold(
       appBar: AppBar(
         title: const Text('User Profile'),
@@ -49,6 +51,16 @@ class _profilePageState extends State<profilePage> {
                 _buildProfileInfo('Blood Group', bloodGroup),
                 _buildProfileInfo('Date of Birth', dob),
                 _buildProfileInfo('Contact No', contactNo),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UpdateProfilePage(),
+                        ));
+                  },
+                  child: Text('Update profile'),
+                )
               ],
             ),
           ),
