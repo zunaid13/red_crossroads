@@ -16,6 +16,8 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
   TextEditingController dobController = TextEditingController();
   TextEditingController contactNoController = TextEditingController();
   TextEditingController divisionController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   bool isDonor = false;
   bool isVisible = false;
@@ -33,6 +35,8 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
     dobController.text = currentUser.dob;
     contactNoController.text = currentUser.contact_no;
     divisionController.text = currentUser.division;
+    passwordController.text = currentUser.password;
+    confirmPasswordController.text = currentUser.password;
   }
 
   @override
@@ -55,12 +59,14 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                _buildTextField('Full Name', fullNameController),
+                _buildTextField('Full Name', fullNameController, false),
                 // _buildTextField('Email', emailController),
                 // _buildTextField('Gender', genderController),
-                _buildTextField('Weight (KGs)', weightController),
-                _buildTextField('Contact No', contactNoController),
-                _buildTextField('Division', divisionController),
+                _buildTextField('Weight (KGs)', weightController, false),
+                _buildTextField('Contact No', contactNoController, false),
+                _buildTextField('Division', divisionController, false),
+                _buildTextField('Password', divisionController, true),
+                _buildTextField('Confirm password', divisionController, true),
                 _buildCheckbox('Opt In as Donor', isDonor, (value) {
                   setState(() {
                     isDonor = value!;
@@ -80,6 +86,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                     currentUser.donor = isDonor;
                     currentUser.visible = isVisible;
                     currentUser.division = divisionController.text;
+                    currentUser.password = passwordController.text;
                     Api.updateUserInfo();
                     Navigator.pop(context);
                     // Update user information here
@@ -98,7 +105,8 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller) {
+  Widget _buildTextField(
+      String label, TextEditingController controller, bool obscure) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
@@ -106,6 +114,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
         decoration: InputDecoration(
           labelText: label,
         ),
+        obscureText: obscure,
       ),
     );
   }
