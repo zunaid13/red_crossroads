@@ -65,8 +65,9 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                 _buildTextField('Weight (KGs)', weightController, false),
                 _buildTextField('Contact No', contactNoController, false),
                 _buildTextField('Division', divisionController, false),
-                _buildTextField('Password', divisionController, true),
-                _buildTextField('Confirm password', divisionController, true),
+                _buildTextField('Password', passwordController, true),
+                _buildTextField(
+                    'Confirm password', confirmPasswordController, true),
                 _buildCheckbox('Opt In as Donor', isDonor, (value) {
                   setState(() {
                     isDonor = value!;

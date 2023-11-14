@@ -73,4 +73,17 @@ class Validator {
     }
     return -1;
   }
+
+  static List<User> filterUsers(String gender, String bloodgroup) {
+    List<User> ret = [];
+    for (int i = 0; i < allUsers.length; i++) {
+      if (gender != "All" && gender != allUsers[i].gender) continue;
+      String sign = '+';
+      if (allUsers[i].rh_factor[0] == 'N') sign = '-';
+      if (bloodgroup != "All" && bloodgroup != allUsers[i].bloodGroup + sign)
+        continue;
+      ret.add(allUsers[i]);
+    }
+    return ret;
+  }
 }

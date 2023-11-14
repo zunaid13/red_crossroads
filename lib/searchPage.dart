@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_project/model/user_model.dart'; // Make sure to import your user model
+import 'package:my_project/services/validate.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -98,13 +99,14 @@ class _SearchPageState extends State<SearchPage> {
 class SearchResultPage extends StatelessWidget {
   final String gender;
   final String bloodGroup;
-
-  SearchResultPage({required this.gender, required this.bloodGroup});
-
   // Dummy data for demonstration purposes (replace it with actual data from your database)
   List<User> searchResults = [
     // Add more user profiles as needed
   ];
+  // List<User> searchResults = allUsers;
+
+  SearchResultPage({required this.gender, required this.bloodGroup})
+      : searchResults = Validator.filterUsers(gender, bloodGroup);
 
   @override
   Widget build(BuildContext context) {
@@ -143,8 +145,8 @@ class SearchResultPage extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Gender: $gender'),
-            Text('Blood Group: $bloodGroup'),
+            Text('Gender: ${user.gender}'),
+            Text('Blood Group: ${user.bloodGroup}'),
           ],
         ),
         onTap: () {
