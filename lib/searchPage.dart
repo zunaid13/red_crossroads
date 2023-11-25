@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_project/model/user_model.dart'; // Make sure to import your user model
 import 'package:my_project/services/validate.dart';
+import 'package:my_project/specificProfile.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -119,20 +120,20 @@ class SearchResultPage extends StatelessWidget {
         child: ListView.builder(
           itemCount: searchResults.length,
           itemBuilder: (context, index) {
-            return _buildSearchResultTile(searchResults[index]);
+            return _buildSearchResultTile(searchResults[index], context);
           },
         ),
       ),
     );
   }
 
-  Widget _buildSearchResultTile(User user) {
+  Widget _buildSearchResultTile(User user, BuildContext context) {
     return Card(
       elevation: 5,
       margin: EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundImage: AssetImage('assets/profile'),
+          backgroundImage: AssetImage('assets/profile.png'),
           radius: 30,
         ),
         title: Text(
@@ -150,8 +151,10 @@ class SearchResultPage extends StatelessWidget {
           ],
         ),
         onTap: () {
-          // Implement navigation to the detailed user profile page
-          // You can use the user information to display detailed information.
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => specificProfilePage(user: user)));
         },
       ),
     );

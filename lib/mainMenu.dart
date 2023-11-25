@@ -5,6 +5,7 @@ import 'package:my_project/loginPage.dart';
 import 'package:my_project/map.dart';
 import 'package:my_project/searchPage.dart';
 import 'package:my_project/viewProfile.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class mainMenu extends StatelessWidget {
   Future<void> _showExitConfirmationDialog(BuildContext context) async {
@@ -171,6 +172,28 @@ class mainMenu extends StatelessWidget {
                   height: 45,
                   width: double.infinity,
                   child: ElevatedButton(
+                    onPressed: _launchURL,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.add_link, size: 40),
+                        Text('Learn More', style: TextStyle(fontSize: 16)),
+                        Icon(Icons.arrow_forward,
+                            size: 40), // Add an arrow icon
+                      ],
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                SizedBox(
+                  height: 45,
+                  width: double.infinity,
+                  child: ElevatedButton(
                     onPressed: () {
                       _showLogoutConfirmationDialog(context);
                     },
@@ -220,5 +243,15 @@ class mainMenu extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _launchURL() async {
+    Uri url = Uri.parse(
+        'https://www.who.int/campaigns/world-blood-donor-day/2018/who-can-give-blood?fbclid=IwAR045r9IXUOK_JURiOz7HFUgwNH6zqwKRHtTL8Z-PVTnafES7iRSghc06os');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

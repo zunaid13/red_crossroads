@@ -77,6 +77,7 @@ class Validator {
   static List<User> filterUsers(String gender, String bloodgroup) {
     List<User> ret = [];
     for (int i = 0; i < allUsers.length; i++) {
+      if (allUsers[i].donor == false) continue;
       if (gender != "All" && gender != allUsers[i].gender) continue;
       String sign = '+';
       if (allUsers[i].rh_factor[0] == 'N') sign = '-';
