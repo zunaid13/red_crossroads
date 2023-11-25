@@ -2,6 +2,7 @@ class Messages {
   int id = 0;
   String sender = "";
   String message = "";
+  String receiver = "";
 
   Messages();
 
@@ -9,13 +10,15 @@ class Messages {
     return Messages()
       ..id = json['id'] ?? 0
       ..sender = json['sender'] ?? ""
-      ..message = json['message'] ?? "";
+      ..message = json['message'] ?? ""
+      ..receiver = json['receiver'] ?? "";
   }
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'sender': sender,
       'message': message,
+      'receiver': receiver
     };
   }
 }

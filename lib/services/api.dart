@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_project/model/messages_model.dart';
 import 'package:my_project/model/user_model.dart';
 
 class Api {
@@ -16,6 +17,22 @@ class Api {
         allUsers = jsonList.map((json) => User.fromJson(json)).toList();
         print("AllUsers: ");
         for (int i = 0; i < allUsers.length; i++) print(allUsers[i].username);
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
+  static getAllMessages() async {
+    var url = Uri.parse("${baseUrl}messages");
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        List<dynamic> jsonList = jsonDecode(response.body);
+        allMessages = jsonList.map((json) => Messages.fromJson(json)).toList();
+        print("AllMessages: ");
+        for (int i = 0; i < allMessages.length; i++)
+          print(allMessages[i].sender);
       }
     } catch (e) {
       print("Error: $e");
