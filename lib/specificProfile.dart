@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/chat.dart';
 import 'package:my_project/model/user_model.dart';
 import 'package:my_project/updateProfilePage.dart';
 
@@ -7,6 +8,12 @@ class specificProfilePage extends StatefulWidget {
   specificProfilePage({required this.user});
   @override
   _specificProfilePageState createState() => _specificProfilePageState();
+}
+
+class DetailArguments {
+  final String title;
+
+  DetailArguments(this.title);
 }
 
 class _specificProfilePageState extends State<specificProfilePage> {
@@ -67,11 +74,12 @@ class _specificProfilePageState extends State<specificProfilePage> {
                 _buildProfileInfo('Contact No', contactNo),
                 ElevatedButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => UpdateProfilePage(),
-                    // ));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ChatScreen(arguments: DetailArguments(fullName)),
+                        ));
                   },
                   child: Text('Contact'),
                 )

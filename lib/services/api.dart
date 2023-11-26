@@ -16,7 +16,8 @@ class Api {
         List<dynamic> jsonList = jsonDecode(response.body);
         allUsers = jsonList.map((json) => User.fromJson(json)).toList();
         print("AllUsers: ");
-        for (int i = 0; i < allUsers.length; i++) print(allUsers[i].username);
+        for (int i = 0; i < allUsers.length; i++)
+          print(allUsers[i].username + ' ' + allUsers[i].password);
       }
     } catch (e) {
       print("Error: $e");
