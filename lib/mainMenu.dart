@@ -77,7 +77,7 @@ class mainMenu extends StatelessWidget {
         ),
         body: Center(
           child: Padding(
-            padding: EdgeInsets.only(left: 25, right: 25, bottom: 150),
+            padding: EdgeInsets.only(top: 1, left: 25, right: 25, bottom: 50),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -87,7 +87,7 @@ class mainMenu extends StatelessWidget {
                   width: 350,
                 ),
                 SizedBox(
-                  height: 120,
+                  height: 50,
                 ),
                 SizedBox(
                   height: 45,
@@ -247,17 +247,5 @@ class mainMenu extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<void> _launchURL() async {
-    // Uri url = Uri.parse(
-    //     'https://www.who.int/campaigns/world-blood-donor-day/2018/who-can-give-blood?fbclid=IwAR045r9IXUOK_JURiOz7HFUgwNH6zqwKRHtTL8Z-PVTnafES7iRSghc06os');
-    const url = "https://www.google.com";
-
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }

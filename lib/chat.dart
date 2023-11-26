@@ -88,7 +88,14 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('One-to-One Chat'),
+        title: Text('Chat'),
+        actions: <Widget>[
+          IconButton(
+              onPressed: () {
+                initializeChat();
+              },
+              icon: Icon(Icons.refresh))
+        ],
       ),
       body: Stack(
         children: [
@@ -141,7 +148,9 @@ class ChatMessage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: (sender == currentUser.username)
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
         children: [
           Text(
             sender, // Display sender's name
@@ -151,26 +160,36 @@ class ChatMessage extends StatelessWidget {
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: (sender == currentUser.username)
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: (sender == currentUser.username)
+                      ? CrossAxisAlignment.end
+                      : CrossAxisAlignment.start,
                   children: [
                     Container(
                       padding: EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: (sender == currentUser.username)
+                            ? Colors.pink
+                            : Color.fromARGB(255, 42, 40, 40),
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20.0),
-                          bottomLeft: Radius.circular(20.0),
-                          bottomRight: Radius.circular(20.0),
-                        ),
+                            topLeft: (sender == currentUser.username)
+                                ? Radius.circular(20.0)
+                                : Radius.circular(0.0),
+                            bottomLeft: Radius.circular(20.0),
+                            bottomRight: Radius.circular(20.0),
+                            topRight: (sender == currentUser.username)
+                                ? Radius.circular(0.0)
+                                : Radius.circular(20.0)),
                       ),
                       child: Text(
                         text,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white, fontSize: 17.0),
                       ),
                     ),
                     SizedBox(height: 5.0),

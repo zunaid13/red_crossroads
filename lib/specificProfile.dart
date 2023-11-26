@@ -38,6 +38,22 @@ class _specificProfilePageState extends State<specificProfilePage> {
     contactNo = widget.user.contact_no;
   }
 
+  String calculateAge(String dateString) {
+    DateTime currentDate = DateTime.now();
+    DateTime birthDate = DateTime.parse(dateString);
+
+    int age = currentDate.year - birthDate.year;
+
+    // Check if the birthday hasn't occurred yet this year
+    if (currentDate.month < birthDate.month ||
+        (currentDate.month == birthDate.month &&
+            currentDate.day < birthDate.day)) {
+      age--;
+    }
+
+    return age.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,8 +86,8 @@ class _specificProfilePageState extends State<specificProfilePage> {
                 _buildProfileInfo('Gender', gender),
                 _buildProfileInfo('Weight', '$weight KGs'),
                 _buildProfileInfo('Blood Group', bloodGroup),
-                _buildProfileInfo('Date of Birth', dob),
-                _buildProfileInfo('Contact No', contactNo),
+                _buildProfileInfo('Age', calculateAge(dob)),
+                _buildProfileInfo('Contact No', '017********'),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
