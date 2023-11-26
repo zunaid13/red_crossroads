@@ -172,7 +172,11 @@ class mainMenu extends StatelessWidget {
                   height: 45,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: _launchURL,
+                    // onPressed: _launchURL,
+                    onPressed: () async {
+                      final url = 'https://www.youtube.com/watch?v=6emUjt2-Jok';
+                      await launchUrl(Uri.parse(url));
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -246,10 +250,12 @@ class mainMenu extends StatelessWidget {
   }
 
   Future<void> _launchURL() async {
-    Uri url = Uri.parse(
-        'https://www.who.int/campaigns/world-blood-donor-day/2018/who-can-give-blood?fbclid=IwAR045r9IXUOK_JURiOz7HFUgwNH6zqwKRHtTL8Z-PVTnafES7iRSghc06os');
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
+    // Uri url = Uri.parse(
+    //     'https://www.who.int/campaigns/world-blood-donor-day/2018/who-can-give-blood?fbclid=IwAR045r9IXUOK_JURiOz7HFUgwNH6zqwKRHtTL8Z-PVTnafES7iRSghc06os');
+    const url = "https://www.google.com";
+
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
     } else {
       throw 'Could not launch $url';
     }
