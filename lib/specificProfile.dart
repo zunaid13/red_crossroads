@@ -78,7 +78,7 @@ class _specificProfilePageState extends State<specificProfilePage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              ChatScreen(arguments: DetailArguments(fullName)),
+                              ChatScreen(arguments: DetailArguments(email)),
                         ));
                   },
                   child: Text('Contact'),

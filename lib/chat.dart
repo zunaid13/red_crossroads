@@ -1,4 +1,10 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
+import 'package:my_project/model/messages_model.dart';
+import 'package:my_project/model/user_model.dart';
+import 'package:my_project/services/api.dart';
+import 'package:my_project/services/messageService.dart';
 import 'package:my_project/specificProfile.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -9,24 +15,46 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final TextEditingController _textController = TextEditingController();
-  List<ChatMessage> _messages = [];
   late String reciever;
+  List<ChatMessage> _messages = [];
+  final TextEditingController _textController = TextEditingController();
 
-  void _handleSubmitted(String text) {
+  @override
+  void initState() {
+    super.initState();
+    // Access widget.user in the initState method
+
+    reciever = widget.arguments.title;
+    initializeChat();
+  }
+
+  Future<void> initializeChat() async {
+    await Api.getAllMessages();
+    _messages = await MessageService.obtainChat(reciever);
+    setState(() {});
+    for (int i = 0; i < _messages.length; i++) {
+      print(i);
+    }
+  }
+
+  void _handleSubmitted(String text) async {
     _textController.clear();
     if (text != '') {
       ChatMessage message = ChatMessage(
         text: text,
         // For demonstration purposes, assuming the message is sent by the user
         // Replace this with actual user information (username, avatar, etc.)
-        sender: 'Oven',
+        sender: currentUser.username,
         // Adding timestamp for demonstration
         time: DateTime.now(),
+        receiver: reciever,
       );
       setState(() {
         _messages.insert(0, message);
       });
+      allMessages.insert(0, MessageService.chatToMessage(_messages[0]));
+      await Api.addMessage(allMessages[0]);
+      await initializeChat();
     }
   }
 
@@ -54,13 +82,6 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // Access widget.user in the initState method
-    reciever = widget.arguments.title;
   }
 
   @override
@@ -105,13 +126,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
 class ChatMessage extends StatelessWidget {
   final String text;
-  final String sender;
+  final String sender, receiver;
   final DateTime time;
 
   const ChatMessage({
     required this.text,
     required this.sender,
     required this.time,
+    required this.receiver,
   });
 
   @override

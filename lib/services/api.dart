@@ -40,6 +40,26 @@ class Api {
     }
   }
 
+  static addMessage(Messages newMessage) async {
+    var url = Uri.parse("${baseUrl}messages");
+    print('Adding new message to database');
+    final body = json.encode(newMessage.toJson());
+    print(body);
+
+    try {
+      final response = await http.post(url,
+          headers: <String, String>{'Content-Type': 'application/json'},
+          body: body);
+      if (response.statusCode == 200) {
+        print('Message added successfully');
+      } else {
+        print('Failed to add message');
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
   static addUserToDatabase() async {
     var url = Uri.parse("${baseUrl}add_user");
     print('Adding user to database');
