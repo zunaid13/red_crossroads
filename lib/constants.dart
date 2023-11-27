@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-const String googleApiKey = "AIzaSyCNEtCotSPe0rQ0OLDBx-K9HQqGL4MAPRo";
+const String googleApiKey = "AIzaSyBuF5HbIXxtmjHoNgKn5fDA-rM-71t3YKc";
 const Color primaryColor = Color(0xFF78B61FF);
 const double defaultPadding = 16.0;

@@ -46,7 +46,7 @@ class loginPageState extends State<loginPage> {
                     Text(
                       "Welcome to Red Crossroads",
                       style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 64),
                     TextFormField(

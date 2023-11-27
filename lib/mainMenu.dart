@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:my_project/loginPage.dart';
-import 'package:my_project/map.dart';
+import 'package:my_project/mapPage.dart';
 import 'package:my_project/searchPage.dart';
 import 'package:my_project/viewProfile.dart';
 import 'package:url_launcher/url_launcher.dart';

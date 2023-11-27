@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_project/map.dart';
+import 'package:my_project/mapPage.dart';
 
 class introPage extends StatelessWidget {
   @override
