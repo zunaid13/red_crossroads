@@ -13,8 +13,8 @@ class splashScreen extends StatelessWidget {
           child: Column(children: [
         Image.asset('assets/Logo.png'),
       ])),
-      // nextScreen: loginPage(),
-      nextScreen: mapPage(),
+      nextScreen: loginPage(),
+      // nextScreen: mapPage(),
       splashIconSize: 295,
       duration: 3500,
       splashTransition: SplashTransition.fadeTransition,
