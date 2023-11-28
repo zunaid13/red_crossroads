@@ -99,6 +99,12 @@ class mainMenu extends StatelessWidget {
                       if (Api.isLogged == true) {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => mapPage()));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Please Login to Continue'),
+                          ),
+                        );
                       }
                     },
                     child: Row(
@@ -128,6 +134,12 @@ class mainMenu extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SearchPage()));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Please Login to Continue'),
+                          ),
+                        );
                       }
                     },
                     child: Row(
@@ -157,6 +169,12 @@ class mainMenu extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => profilePage()));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Please Login to Continue'),
+                          ),
+                        );
                       }
                     },
                     child: Row(
