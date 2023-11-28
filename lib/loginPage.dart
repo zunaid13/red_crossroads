@@ -4,6 +4,7 @@ import 'package:my_project/forgotPassword.dart';
 import 'package:my_project/mainMenu.dart';
 import 'package:my_project/model/user_model.dart';
 import 'package:my_project/registrationPage.dart';
+import 'package:my_project/services/api.dart';
 import 'package:my_project/services/validate.dart';
 
 class loginPage extends StatefulWidget {
@@ -145,6 +146,7 @@ class loginPageState extends State<loginPage> {
 
   void _submitForm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
+      Api.isLogged = true;
       // Form is valid, you can perform actions here
       // For example, you can send data to a server or navigate to another page.
       if (currentUser.gender == "") {

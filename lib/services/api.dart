@@ -6,6 +6,7 @@ import 'package:my_project/model/messages_model.dart';
 import 'package:my_project/model/user_model.dart';
 
 class Api {
+  static bool isLogged = false;
   static const baseUrl = "http://192.168.0.110:2000/api/";
 
   static getAllUsers() async {

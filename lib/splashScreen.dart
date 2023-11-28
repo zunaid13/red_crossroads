@@ -1,7 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:my_project/chat.dart';
 import 'package:my_project/loginPage.dart';
+import 'package:my_project/mainMenu.dart';
 import 'package:my_project/mapPage.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -13,8 +13,8 @@ class splashScreen extends StatelessWidget {
           child: Column(children: [
         Image.asset('assets/Logo.png'),
       ])),
-      nextScreen: loginPage(),
-      // nextScreen: mapPage(),
+      // nextScreen: loginPage(),
+      nextScreen: mainMenu(),
       splashIconSize: 295,
       duration: 3500,
       splashTransition: SplashTransition.fadeTransition,

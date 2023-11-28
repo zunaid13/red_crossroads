@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_project/loginPage.dart';
 import 'package:my_project/mapPage.dart';
 import 'package:my_project/searchPage.dart';
+import 'package:my_project/services/api.dart';
 import 'package:my_project/viewProfile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -50,6 +51,7 @@ class mainMenu extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
+                Api.isLogged = false;
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => loginPage()));
               },
@@ -94,8 +96,10 @@ class mainMenu extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => mapPage()));
+                      if (Api.isLogged == true) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => mapPage()));
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,10 +123,12 @@ class mainMenu extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SearchPage()));
+                      if (Api.isLogged == true) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SearchPage()));
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -146,10 +152,12 @@ class mainMenu extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => profilePage()));
+                      if (Api.isLogged == true) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => profilePage()));
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -199,13 +207,21 @@ class mainMenu extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      _showLogoutConfirmationDialog(context);
+                      if (Api.isLogged == true) {
+                        _showLogoutConfirmationDialog(context);
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => loginPage()));
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Icon(Icons.logout, size: 40),
-                        Text('Log Out', style: TextStyle(fontSize: 16)),
+                        Text((Api.isLogged) ? 'Log Out' : 'Log In',
+                            style: TextStyle(fontSize: 16)),
                         Icon(Icons.arrow_forward,
                             size: 40), // Add an arrow icon
                       ],
